@@ -1,17 +1,41 @@
 ## comparison of common MFCC variants
 
 This is a humble attempt to reproduce the htk type of MFCC features with [essentia](http://essentia.upf.edu/).  
- for a tutorial how to extract htk see  [compute_htk_the_mfcc_way] (https://github.com/MTG/essentia/blob/master/src/examples/tutorial/example_inverse_mfccs.py)
+See a complete tutorial how to [compute mfcc the htk way] (https://github.com/MTG/essentia/blob/master/src/examples/tutorial/example_mfcc_the_htk_way.py)
 
-### Comparison to librosa
+or a [python/jupyter notebook] (https://github.com/georgid/mfcc-htk-an-librosa/blob/master/mfcc_parameters_comparison_essentia.ipynb) that compares essentia's default MFCCs and htk's preset of parameters
+
+## how to compute inverse MFCC
+[ipython notebook] (https://github.com/georgid/mfcc-htk-an-librosa/blob/master/inverse_mfccs.ipynb)
+
+More details in the [essentia news] (http://essentia.upf.edu/news). 
+
+### Comparison of htk and librosa
 We also compared how htk type of MFCCs differ from the ones extracted with [librosa](http://librosa.github.
 io/librosa/generated/librosa.feature.mfcc.html?highlight=mfcc)
 	 for this comparison [scirpt](https://github.com/georgid/mfcc-htk-an-librosa/blob/master/htk%20and%20librosa%20MFCC%20extract%20comparison.ipynb)
 
-### The differences are due to: 
+#### The differences are due to: 
 
 - preempahsis (not done in librosa)
 - liftering (not done in librosa)
-- mel triangualr filterbank is unit_sum in librosa and unit_max in htk
+- mel triangular filterbank is unit_sum in librosa and unit_max in htk
+
+## License
+ Copyright (C) 2015  Music Technology Group - Universitat Pompeu Fabra  
+ 
+ This notebook is free software: you can redistribute it and/or modify it under  
+ the terms of the GNU Affero General Public License as published by the Free  
+ Software Foundation (FSF), either version 3 of the License, or (at your  
+ option) any later version.  
+ 
+ This program is distributed in the hope that it will be useful, but WITHOUT  
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS  
+ FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more  
+ details.  
+ 
+ You should have received a copy of the Affero GNU General Public License  
+ version 3 along with this program.  If not, see http://www.gnu.org/licenses/  
+
 
 For questions: georgi.dzhambazov@upf.edu
