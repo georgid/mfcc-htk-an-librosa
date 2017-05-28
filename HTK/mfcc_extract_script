@@ -1,0 +1,4 @@
+
+PATH_HCopy=/usr/local/bin/HCopy;
+CONFIG=config_wav_to_mfcc_0;
+$PATH_HCopy -A -D -T 1 -C $CONFIG audio/vignesh.wav HTK/vignesh.$CONFIG

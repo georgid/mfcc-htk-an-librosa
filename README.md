@@ -1,25 +1,40 @@
-## comparison of common MFCC variants
+Comparison of common MFCC variants
+======================================
 
-This is a humble attempt to reproduce the htk type of MFCC features with [essentia](http://essentia.upf.edu/).  
-See a complete tutorial how to [compute mfcc the htk way] (https://github.com/MTG/essentia/blob/master/src/examples/tutorial/example_mfcc_the_htk_way.py)
+This is a humble attempt to reproduce the htk type of MFCC features with [essentia](http://essentia.upf.edu/). Comparison is done to the MFCC extractors of htk and [librosa](http://librosa.github.io)  
 
-or a [python/jupyter notebook] (https://github.com/georgid/mfcc-htk-an-librosa/blob/master/mfcc_parameters_comparison_essentia.ipynb) that compares essentia's default MFCCs and htk's preset of parameters
 
-## how to compute inverse MFCC
-[ipython notebook] (https://github.com/georgid/mfcc-htk-an-librosa/blob/master/inverse_mfccs.ipynb)
+See a complete tutorial how to [compute mfcc the htk way](https://github.com/MTG/essentia/blob/master/src/examples/tutorial/example_mfcc_the_htk_way.py) with essentia.
 
-More details in the [essentia news] (http://essentia.upf.edu/news). 
+## Visualize  MFCCs with essentia's default and htk's default preset of parameters
+ [ipython/jupyter notebook](https://github.com/georgid/mfcc-htk-an-librosa/blob/master/mfcc_parameters_comparison_essentia.ipynb)
 
-### Comparison of htk and librosa
+to extract mfcc with htk check HTK/mfcc_extract_script
+
+ 
+## Comparison of htk and librosa
 We also compared how htk type of MFCCs differ from the ones extracted with [librosa](http://librosa.github.
 io/librosa/generated/librosa.feature.mfcc.html?highlight=mfcc)
 	 for this comparison [scirpt](https://github.com/georgid/mfcc-htk-an-librosa/blob/master/htk%20and%20librosa%20MFCC%20extract%20comparison.ipynb)
 
-#### The differences are due to: 
+#### The differences are due to
 
 - preempahsis (not done in librosa)
 - liftering (not done in librosa)
 - mel triangular filterbank is unit_sum in librosa and unit_max in htk
+
+
+## Adjust many different parameters of mfcc
+An example of how to compute different parameters of MFCCs in essentia: preemphasis, cepstral-mean normalization, deltas and acceleration, etc.
+[example](https://github.com/georgid/mfcc-htk-an-librosa/blob/master/mfcc-htk-many-parameters.py)
+
+## how to compute inverse MFCC
+[ipython notebook](https://github.com/georgid/mfcc-htk-an-librosa/blob/master/inverse_mfccs.ipynb)
+
+
+### More details in the [essentia news](http://essentia.upf.edu/news). 
+
+
 
 ## License
  Copyright (C) 2015  Music Technology Group - Universitat Pompeu Fabra  
