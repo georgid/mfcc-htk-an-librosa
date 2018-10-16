@@ -1,4 +1,11 @@
 
 PATH_HCopy=/usr/local/bin/HCopy;
-CONFIG=config_wav_to_mfcc_0;
+CONFIG=config_wav_to_mfcc_2;
 $PATH_HCopy -A -D -T 1 -C $CONFIG audio/vignesh.wav HTK/vignesh.$CONFIG
+
+# e.g.
+cd ~/workspace/mfcc-htk-an-librosa/
+$PATH_HCopy -A -D -T 1 -C $CONFIG /Users/joro/Dropbox/HansensDataset/vocal_separated/trick_me_vocals.wav HTK/trick_me_vocal.$CONFIG
+
+
+$PATH_HCopy -A -D -T 1 -C $CONFIG /Users/joro/Dropbox/HansensDataset/vocal_separated/trick_me_vocals.wav HTK/trick_me_vocal.$CONFIG

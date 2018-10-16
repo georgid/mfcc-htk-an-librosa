@@ -17,6 +17,19 @@ import essentia.standard as ess
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+
+# def preemph(x, alpha):
+#     y = x[1:] - alpha * x[:-1]
+#     return y
+
+
+def preemph(x,alpha):
+  y = np.array(x, copy=True)
+  y[1:] -= alpha * y[:-1] # starting from 1 instead of 2 gives smaller error
+  y[0] *= (1.0 - alpha)
+  return y
+
 def extractor(filename, PREEMPH):    
 
     fs = 44100
@@ -24,12 +37,15 @@ def extractor(filename, PREEMPH):
                                           sampleRate = fs)()
     # dynamic range expansion as done in HTK implementation
     audio = audio*2**15
-
-    frameSize = 1102 # corresponds to htk default WINDOWSIZE = 250000.0 
+    
+    
+    frameSize = 1102 # corresponds to htk default WINDOWSIZE = 250000.0
+#     frameSize = 2048 # corresponds to htk default WINDOWSIZE = 464399.0 
+ 
     hopSize = 441 # corresponds to htk default TARGETRATE = 100000.0
     fftSize = 2048
     spectrumSize= fftSize//2+1
-    zeroPadding = fftSize - frameSize
+    zeroPadding = int(fftSize - frameSize)
 
     w = ess.Windowing(type = 'hamming', #  corresponds to htk default  USEHAMMING = T
                         size = frameSize, 
@@ -52,19 +68,27 @@ def extractor(filename, PREEMPH):
                         logType = 'log',
                         liftering = 22) # corresponds to htk default CEPLIFTER = 22
 
-    preemph_filter = ess.IIR(numerator=[1-PREEMPH])
+    preemph_filter = ess.IIR(numerator=[1.,-PREEMPH])
     mfccs = []
     # startFromZero = True, validFrameThresholdRatio = 1 : the way htk computes windows
-    for frame in ess.FrameGenerator(audio, frameSize = frameSize, hopSize = hopSize , startFromZero = True, validFrameThresholdRatio = 1):
-        if PREEMPH != 0:
-           frame_doubled_first = np.insert(frame,0,frame[0])  ##### if PREEMPHASIS needed
-           preemph_frame = preemph_filter(frame_doubled_first)
-           frame = preemph_frame[1:]
-        
+    for i,frame in enumerate(ess.FrameGenerator(audio, frameSize = frameSize, hopSize = hopSize , startFromZero = True, validFrameThresholdRatio = 1)):
+            
+# WITH essentia preemph filter
+#             frame_doubled_first = np.insert(frame,0,frame[0])  ##### if PREEMPHASIS needed
+#             preemph_frame = preemph_filter(frame_doubled_first)
+#             frame = preemph_frame[1:]
+            
+#         frame_doubled_first = np.insert(frame,0,frame[0])  ##### need an additional sample to compensate for the one lost in preemphasis
+        frame = preemph(frame, PREEMPH)
+
         spect = spectrum(w(frame))
         mel_bands, mfcc_coeffs = mfcc_htk(spect)
+        
+        if np.isnan(mfcc_coeffs).any():
+            print 'frame  {} has nans'.format(i)
+            mfcc_coeffs = np.nan_to_num(mfcc_coeffs) #source separartion results in NaN MFCCs, extracted with essentia. workaround for NaNs -> to zero
+          
         mfccs.append(mfcc_coeffs)
-
 
     # transpose to have it in a better shape
     # we need to convert the list to an essentia.array first (== numpy.array of floats)
