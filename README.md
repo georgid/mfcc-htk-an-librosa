@@ -1,7 +1,8 @@
 Comparison of common MFCC variants
 ======================================
 
-This is a humble attempt to reproduce the htk type of MFCC features with [essentia](http://essentia.upf.edu/). Comparison is done to the MFCC extractors of htk and [librosa](http://librosa.github.io)  
+This is a humble attempt to reproduce the [htk](http://htk.eng.cam.ac.uk/) type of MFCC features with [essentia](http://essentia.upf.edu/). The MFCC extracted with essentia are compared to these extracted with htk and these extracted with 
+ [librosa](http://librosa.github.io)  
 
 
 See a complete tutorial how to [compute mfcc the htk way](https://github.com/MTG/essentia/blob/master/src/examples/tutorial/example_mfcc_the_htk_way.py) with essentia.
